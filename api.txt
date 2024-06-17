@@ -1,0 +1,54 @@
+===GAMES===
+
+GET https://backendexample.sanbersy.com/api/data-game
+
+GET https://backendexample.sanbersy.com/api/data-game/{ID_GAMES}
+
+POST https://backendexample.sanbersy.com/api/data-game
+
+PUT https://backendexample.sanbersy.com/api/data-game/{ID_GAMES}
+
+DELETE https://backendexample.sanbersy.com/api/data-game/{ID_GAMES}
+
+==detail data game==
+
+genre: string
+image_url: string
+singlePlayer: boolean (true or false) / (1 or 0)
+multiplayer: boolean (true or false) / (1 or 0)
+name: string
+platform: string
+release: string
+
+===MOVIES===
+
+GET https://backendexample.sanbersy.com/api/data-movie
+
+GET https://backendexample.sanbersy.com/api/data-movie/{ID_MOVIES}
+
+POST https://backendexample.sanbersy.com/api/data-movie
+
+PUT https://backendexample.sanbersy.com/api/data-movie/{ID_MOVIES}
+
+DELETE https://backendexample.sanbersy.com/api/data-movie/{ID_MOVIES}
+
+==detail data movie==
+
+description: string
+duration: integer
+genre: string
+image_url: string
+rating: integer
+review: string
+title: string
+year: integer
+
+===USER===
+POST https://backendexample.sanbersy.com/api/register
+(parameter untuk register name, email dan password)
+
+POST https://backendexample.sanbersy.com/api/user-login
+(parameter untuk login email dan password)
+
+POST https://backendexample.sanbersy.com/api/change-password
+(parameter untuk change password current_password, new_password dan new_confirm_password)
