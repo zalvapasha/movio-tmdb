@@ -2,6 +2,7 @@ import axios from "axios";
 
 const baseURL = "https://api.themoviedb.org/3"
 const api_key = "f3ea7b934386e712a1124cc7028cc627"
+
 // Movie
 export const getMoviesPopular = async () => {
     const movie = await axios.get(`${baseURL}/movie/popular?api_key=${api_key}`)
@@ -23,6 +24,7 @@ export const getMoviesTopRated = async () => {
     return movie.data.results
 }
 
+// TV Shows
 export const getTVShowsPopular = async () => {
     const tv = await axios.get(`${baseURL}/tv/popular?api_key=${api_key}`)
     return tv.data.results
@@ -43,4 +45,27 @@ export const getTVShowsTopRated = async () => {
     return tv.data.results
 }
 
+export const getStreamingMovies = async () => {
+    const movie = await axios.get(`${baseURL}/discover/movie?api_key=${api_key}&watch_region=US&with_watch_monetization_types=flatrate`)
+    return movie.data.results
+}
 
+export const getForRentMovies = async () => {
+    const movie = await axios.get(`${baseURL}/discover/movie?api_key=${api_key}&watch_region=US&with_watch_monetization_types=rent`)
+    return movie.data.results
+}
+
+export const getInTheatersMovies = async () => {
+    const movie = await axios.get(`${baseURL}/discover/movie?api_key=${api_key}&region=US&with_release_type=3|2`)
+    return movie.data.results
+}
+
+export const getTrendingMovies = async () => {
+    const movie = await axios.get(`${baseURL}/trending/movie/week?api_key=${api_key}`)
+    return movie.data.results
+}
+
+export const getTrendingTVShows = async () => {
+    const tv = await axios.get(`${baseURL}/trending/tv/week?api_key=${api_key}`)
+    return tv.data.results
+}
