@@ -10,9 +10,7 @@ import TVShowsPopularPage from '../pages/TVShowsPopularPage';
 import TVShowsAiringTodayPage from '../pages/TVShowsAiringTodayPage';
 import TVShowsOnTVPage from '../pages/TVShowsOnTVPage';
 import TVShowsTopRatedPage from '../pages/TVShowsTopRatedPage';
-
-
-
+import SearchResultPage from '../pages/SearchResultPage';
 
 const AppRouter = () => {
     return(
@@ -24,6 +22,15 @@ const AppRouter = () => {
                     <MainLayout>
                         <HomePage/>
                     </MainLayout>
+                    }
+                />
+
+                <Route
+                    path='/search'
+                    element={
+                        <MainLayout>
+                            <SearchResultPage/>
+                        </MainLayout>
                     }
                 />
 

@@ -3,6 +3,11 @@ import axios from "axios";
 const baseURL = "https://api.themoviedb.org/3"
 const api_key = "f3ea7b934386e712a1124cc7028cc627"
 
+export const searchMultiData = async (q) => {
+    const search = await axios.get(`${baseURL}/search/multi?api_key=${api_key}&query=${q}`)
+    return search.data
+}
+
 // Movie
 export const getMoviesPopular = async () => {
     const movie = await axios.get(`${baseURL}/movie/popular?api_key=${api_key}`)
