@@ -22,6 +22,34 @@ export const getDetailMedia = async (id, media_type) => {
   }
 }
 
+export const getCreditsMedia = async (id, media_type) => {
+  if (media_type === 'movie') {
+    const movie = await axios.get(
+      `${baseURL}/movie/${id}/credits?api_key=${api_key}`
+    )
+    return movie.data
+  } else if (media_type === 'tv') {
+    const tv = await axios.get(`${baseURL}/tv/${id}/credits?api_key=${api_key}`)
+    return tv.data
+  } else {
+    throw new Error('Invalid media type')
+  }
+}
+
+export const getTrailerMedia = async (id, media_type) => {
+  if (media_type === 'movie') {
+    const movie = await axios.get(
+      `${baseURL}/movie/${id}/videos?api_key=${api_key}`
+    )
+    return movie.data
+  } else if (media_type === 'tv') {
+    const tv = await axios.get(`${baseURL}/tv/${id}/videos?api_key=${api_key}`)
+    return tv.data
+  } else {
+    throw new Error('Invalid media type')
+  }
+}
+
 // Movie
 export const getMoviesPopular = async () => {
   const movie = await axios.get(`${baseURL}/movie/popular?api_key=${api_key}`)
