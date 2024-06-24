@@ -10,6 +10,8 @@ const ResultOutput = () => {
   const [notfound, setNotFound] = useState(false)
 
   const imgURL = 'https://image.tmdb.org/t/p/w92'
+  const placeholderPerson = '../src/assets/placeholder-person.jpg'
+  const placeholderPoster = '../src/assets/placeholder-poster.jpg'
 
   useEffect(() => {
     if (q) {
@@ -53,60 +55,88 @@ const ResultOutput = () => {
 
   return (
     <div>
-      <h1 className='text-white'>Result</h1>
-      <div className='bg-red-500 rounded-md p-4'>
-        {data.movies.length > 0 && (
-          <div className='mb-4'>
-            <h2 className='text-xl font-bold'>Movies</h2>
-            <div className='grid grid-cols-2 gap-4'>
-              {data.movies.map((movie) => (
-                <div key={movie.id} className='flex bg-gray-800 p-2 rounded'>
+      {data.movies.length > 0 && (
+        <div className='mb-4'>
+          <div className='border-l-4 border-tertiary flex items-center h-8 pl-2 mb-2'>
+            <h2 className='text-xl text-white font-bold'>Movies</h2>
+          </div>
+          <div className='grid grid-cols-2 gap-4'>
+            {data.movies.map((movie) => (
+              <div key={movie.id} className='flex bg-primary-2 p-2 rounded'>
+                <div className='w-12 mr-2 overflow-hidden'>
                   <img
                     src={imgURL + movie.poster_path}
-                    className=' h-14 mr-2 object-cover rounded'
+                    onError={(e) => (e.target.src = placeholderPoster)}
+                    alt={movie.title}
+                    className='h-full object-cover rounded'
                   />
-                  <div>
-                    <h3 className='text-lg text-white truncate'>
-                      {movie.title}
-                    </h3>
-                    <p className='text-sm text-gray-400'>
-                      {movie.release_date}
-                    </p>
-                  </div>
                 </div>
-              ))}
-            </div>
+                <div>
+                  <h3 className='text-lg text-white line-clamp-1'>
+                    {movie.title}
+                  </h3>
+                  <p className='text-sm text-gray-400'>{movie.release_date}</p>
+                </div>
+              </div>
+            ))}
           </div>
-        )}
-        {data.tvShows.length > 0 && (
-          <div className='mb-4'>
-            <h2 className='text-xl font-bold'>TV Shows</h2>
-            <div className='grid grid-cols-2 gap-4'>
-              {data.tvShows.map((tv) => (
-                <div key={tv.id} className='bg-gray-800 p-2 rounded'>
-                  <h3 className='text-lg text-white truncate'>{tv.name}</h3>
+        </div>
+      )}
+      {data.tvShows.length > 0 && (
+        <div className='mb-4'>
+          <div className='border-l-4 border-tertiary flex items-center h-8 pl-2 mb-2'>
+            <h2 className='text-xl text-white font-bold'>TV Shows</h2>
+          </div>
+
+          <div className='grid grid-cols-2 gap-4'>
+            {data.tvShows.map((tv) => (
+              <div key={tv.id} className='flex bg-primary-2 p-2 rounded'>
+                <div className='w-12 mr-2 overflow-hidden'>
+                  <img
+                    src={imgURL + tv.poster_path}
+                    onError={(e) => (e.target.src = placeholderPoster)}
+                    alt={tv.title}
+                    className='h-full object-cover rounded'
+                  />
+                </div>
+                <div>
+                  <h3 className='text-lg text-white line-clamp-1'>{tv.name}</h3>
                   <p className='text-sm text-gray-400'>{tv.first_air_date}</p>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
-        )}
-        {data.people.length > 0 && (
-          <div>
-            <h2 className='text-xl font-bold'>People</h2>
-            <div className='grid grid-cols-3 gap-4'>
-              {data.people.map((person) => (
-                <div key={person.id} className='bg-gray-800 p-2 rounded'>
-                  <h3 className='text-lg text-white'>{person.name}</h3>
+        </div>
+      )}
+      {data.people.length > 0 && (
+        <div>
+          <div className='border-l-4 border-tertiary flex items-center h-8 pl-2 mb-2'>
+            <h2 className='text-xl text-white font-bold'>Peoples</h2>
+          </div>
+          <div className='grid grid-cols-3 gap-4'>
+            {data.people.map((person) => (
+              <div key={person.id} className='flex bg-primary-2 p-2 rounded'>
+                <div className='h-14 w-14 overflow-hidden rounded mr-2'>
+                  <img
+                    src={imgURL + person.profile_path}
+                    onError={(e) => (e.target.src = placeholderPerson)}
+                    alt={person.name}
+                    className='object-cover rounded'
+                  />
+                </div>
+                <div>
+                  <h3 className='text-lg text-white line-clamp-1'>
+                    {person.name}
+                  </h3>
                   <p className='text-sm text-gray-400'>
                     {person.known_for_department}
                   </p>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   )
 }

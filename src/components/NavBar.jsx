@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 const NavBar = () => {
   const [isOpenMovies, setIsOpenMovies] = useState(false)
   const [isOpenTVShows, setIsOpenTVShows] = useState(false)
+  const [isOpenCategory, setIsOpenCategory] = useState(false)
   const [category, setCategory] = useState('all')
   const searchQuery = useRef()
   const navigate = useNavigate()
@@ -58,7 +59,7 @@ const NavBar = () => {
   }
 
   return (
-    <nav className='header sticky top-0 bg-primary shadow-md flex items-center justify-between px-8 py-0 z-40'>
+    <nav className='header sticky top-0 bg-primary shadow-md flex items-center justify-between px-4 py-2 z-40'>
       <div className='nav font-semibold text-md'>
         <div className='flex items-center'>
           <button
@@ -142,24 +143,68 @@ const NavBar = () => {
         </div>
       </div>
       <div className='flex justify-end'>
-        <form onSubmit={handleSearchOnSubmit} className='flex items-center'>
-          <select
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-            className='bg-transparent text-white border-b-2 focus:outline-none mr-2'
-          >
-            <option value='all'>All</option>
-            <option value='movie'>Movies</option>
-            <option value='tv'>TV Shows</option>
-            <option value='person'>People</option>
-          </select>
+        <form
+          onSubmit={handleSearchOnSubmit}
+          className='flex items-center bg-primary-2 p-2 rounded-md'
+        >
+          <div className='relative'>
+            <button
+              type='button'
+              onClick={() => setIsOpenCategory((prev) => !prev)}
+              className='px-2 text-quaternary border-r-2 border-primary hover:border-opacity-100 hover:text-tertiary duration-200 cursor-pointer active'
+            >
+              {category.charAt(0).toUpperCase() + category.slice(1)}
+            </button>
+            {isOpenCategory && (
+              <div className='bg-primary absolute top-16 flex flex-col p-3 text-sm rounded-md'>
+                <ul className='text-quaternary'>
+                  <li
+                    onClick={() => {
+                      setCategory('all')
+                      setIsOpenCategory(false)
+                    }}
+                    className='pb-1 hover:text-tertiary duration-200 cursor-pointer'
+                  >
+                    All
+                  </li>
+                  <li
+                    onClick={() => {
+                      setCategory('movie')
+                      setIsOpenCategory(false)
+                    }}
+                    className='pb-1 hover:text-tertiary duration-200 cursor-pointer'
+                  >
+                    Movies
+                  </li>
+                  <li
+                    onClick={() => {
+                      setCategory('tv')
+                      setIsOpenCategory(false)
+                    }}
+                    className='pb-1 hover:text-tertiary duration-200 cursor-pointer'
+                  >
+                    TV Shows
+                  </li>
+                  <li
+                    onClick={() => {
+                      setCategory('person')
+                      setIsOpenCategory(false)
+                    }}
+                    className='pb-1 hover:text-tertiary duration-200 cursor-pointer'
+                  >
+                    People
+                  </li>
+                </ul>
+              </div>
+            )}
+          </div>
           <input
             type='text'
             placeholder='Search...'
             id='search'
             data-netlify='true'
             ref={searchQuery}
-            className='bg-transparent border-b-2 placeholder:text-white text-white focus:outline-none'
+            className='bg-transparent placeholder:text-quarternary border-opacity-0 hover:border-opacity-100 hover:text-tertiary duration-200 text-quaternary focus:outline-none ml-2'
           />
         </form>
       </div>

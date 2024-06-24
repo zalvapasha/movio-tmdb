@@ -83,7 +83,7 @@ const TrendingSlider = () => {
             </ul>
           </nav>
         </div>
-        <div className=''>
+        <div>
           {movies.length > 0 ? (
             <Slider {...settings}>
               {movies.map((movie, id) => (
