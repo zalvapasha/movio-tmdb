@@ -12,6 +12,9 @@ export default {
         tertiary: '#ff159a',
         quaternary: '#6f6c7a',
       },
+      screens: {
+        xs: '410px',
+      },
     },
   },
   plugins: [],

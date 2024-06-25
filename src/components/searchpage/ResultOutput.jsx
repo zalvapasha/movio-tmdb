@@ -54,13 +54,13 @@ const ResultOutput = () => {
   }
 
   return (
-    <div>
+    <div className='mx-2'>
       {data.movies.length > 0 && (
-        <div className='mb-4'>
+        <div className='mb-5'>
           <div className='border-l-4 border-tertiary flex items-center h-8 pl-2 mb-2'>
             <h2 className='text-xl text-white font-bold'>Movies</h2>
           </div>
-          <div className='grid grid-cols-2 gap-4'>
+          <div className='grid grid-cols-1 sm:grid-cols-2  gap-4'>
             {data.movies.map((movie) => (
               <div key={movie.id} className='flex bg-primary-2 p-2 rounded'>
                 <div className='w-12 mr-2 overflow-hidden'>
@@ -88,7 +88,7 @@ const ResultOutput = () => {
             <h2 className='text-xl text-white font-bold'>TV Shows</h2>
           </div>
 
-          <div className='grid grid-cols-2 gap-4'>
+          <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
             {data.tvShows.map((tv) => (
               <div key={tv.id} className='flex bg-primary-2 p-2 rounded'>
                 <div className='w-12 mr-2 overflow-hidden'>
@@ -113,7 +113,7 @@ const ResultOutput = () => {
           <div className='border-l-4 border-tertiary flex items-center h-8 pl-2 mb-2'>
             <h2 className='text-xl text-white font-bold'>Peoples</h2>
           </div>
-          <div className='grid grid-cols-3 gap-4'>
+          <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4'>
             {data.people.map((person) => (
               <div key={person.id} className='flex bg-primary-2 p-2 rounded'>
                 <div className='h-14 w-14 overflow-hidden rounded mr-2'>

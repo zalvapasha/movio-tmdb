@@ -29,6 +29,7 @@ const UpcomingTrailerSection = () => {
 
   const settings = {
     className: 'center',
+    arrows: false,
     centerMode: true,
     infinite: true,
     centerPadding: '60px',
@@ -37,6 +38,46 @@ const UpcomingTrailerSection = () => {
     beforeChange: (oldIndex, newIndex) => {
       setCurrentSlide(newIndex)
     },
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          centerPadding: '70px',
+          slidesToScroll: 1,
+          infinite: true,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 3,
+          centerPadding: '10px',
+          slidesToScroll: 1,
+          initialSlide: 1,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          centerPadding: '120px',
+          slidesToScroll: 1,
+          initialSlide: 1,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          arrows: false,
+          infinite: true,
+          centerPadding: '60px',
+          speed: 500,
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   }
 
   const handleFilterClick = (id) => {
@@ -83,14 +124,14 @@ const UpcomingTrailerSection = () => {
     >
       <div className='flex justify-center bg-black bg-opacity-70'>
         <div className='w-11/12 my-5'>
-          <div className='flex items-center ml-5 mb-2'>
-            <h2 className='pr-4 text-white text-xl'>Top Rated Trailer</h2>
-            <nav className='border-[2px] rounded-full border-tertiary'>
-              <ul className='flex text-sm'>
+          <div className='flex flex-col xs:flex-row gap-2 ml-5 mb-2'>
+            <h2 className='pr-4 text-white text-base'>Top Rated Trailer</h2>
+            <nav className='border-[2px] rounded-full border-tertiary w-fit'>
+              <ul className='flex '>
                 {filters.map((filter) => (
                   <li
                     key={filter.id}
-                    className={`px-2 py-[2px] ${filter.active ? 'bg-tertiary text-primary rounded-full' : 'text-white/70'}`}
+                    className={`px-2 py-[2px] text-sm ${filter.active ? 'bg-tertiary text-primary rounded-full' : 'text-white/70'}`}
                     onClick={() => handleFilterClick(filter.id)}
                   >
                     {filter.name}
@@ -105,7 +146,7 @@ const UpcomingTrailerSection = () => {
                 <div key={id}>
                   <div
                     key={data.id}
-                    className='flex flex-col items-center justify-center p-4 '
+                    className='flex flex-col items-center justify-center p-4'
                   >
                     <img
                       src={imgURL + data.backdrop_path}

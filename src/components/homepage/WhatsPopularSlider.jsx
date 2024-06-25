@@ -64,19 +64,45 @@ const WhatsPopularSlider = () => {
     slidesToScroll: 5,
     variableWidth: true,
     arrows: false,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 5,
+          slidesToScroll: 5,
+          infinite: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 4,
+          initialSlide: 4,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2,
+        },
+      },
+    ],
   }
 
   return (
     <div className='flex justify-center bg-primary-2'>
       <div className='w-11/12 my-5'>
-        <div className='flex  items-center ml-5 mb-2'>
-          <h2 className='pr-4 text-white text-xl'>What's Popular</h2>
-          <nav className='border-[2px] rounded-full border-primary'>
-            <ul className='flex text-sm'>
+        <div className='flex flex-col xs:flex-row  gap-2 ml-5 mb-2'>
+          <h2 className='pr-2 text-white text-base'>What's Popular</h2>
+          <nav className='border-[2px] rounded-full border-primary w-fit'>
+            <ul className='flex'>
               {filters.map((filter) => (
                 <li
                   key={filter.id}
-                  className={`px-2 py-[2px] ${filter.active ? 'bg-primary text-tertiary rounded-full' : 'text-white/70'}`}
+                  className={`px-2 py-[2px] text-sm ${filter.active ? 'bg-primary text-tertiary rounded-full' : 'text-white/70'}`}
                   onClick={() => handleFilterClick(filter.id)}
                 >
                   {filter.name}
@@ -85,7 +111,7 @@ const WhatsPopularSlider = () => {
             </ul>
           </nav>
         </div>
-        <div className=''>
+        <div className='card h-64'>
           {movies.length > 0 ? (
             <Slider {...settings}>
               {movies.map((movie, i) => (

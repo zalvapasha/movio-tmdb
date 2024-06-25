@@ -17,7 +17,16 @@ const CastSection = ({ id, media_type }) => {
       })
   }, [id, media_type])
 
-  const visibleCast = showAll ? cast : cast.slice(0, 12)
+  // Determine the number of columns based on screen size
+  const getMaxVisibleCast = () => {
+    const screenWidth = window.innerWidth
+    if (screenWidth >= 1024) return 12 // 4 columns
+    if (screenWidth >= 768) return 9 // 3 columns
+    return 6 // 2 columns
+  }
+
+  const maxVisibleCast = getMaxVisibleCast()
+  const visibleCast = showAll ? cast : cast.slice(0, maxVisibleCast)
 
   return (
     <div className='relative'>
@@ -46,7 +55,7 @@ const CastSection = ({ id, media_type }) => {
           <p>No cast information available</p>
         )}
       </div>
-      {cast.length > 12 && (
+      {cast.length > maxVisibleCast && (
         <div
           className={`flex items-center justify-center w-full mt-4 ${showAll ? '' : 'absolute -bottom-10 bg-gradient-to-t from-primary-1 from-45% h-28 to-transparent'}`}
         >
