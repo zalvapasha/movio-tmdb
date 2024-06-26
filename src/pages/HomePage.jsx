@@ -3,6 +3,7 @@ import WhatsPopularSlider from '../components/homepage/WhatsPopularSlider'
 import TrendingSlider from '../components/homepage/TrendingSlider'
 import UpcomingTrailerSection from '../components/homepage/UpcomingTrailerSection'
 import WelcomeBanner from '../components/homepage/WelcomeBanner'
+import Footer from '../components/Footer'
 
 const HomePage = () => {
   return (
@@ -12,6 +13,7 @@ const HomePage = () => {
         <TrendingSlider />
         <UpcomingTrailerSection />
         <WhatsPopularSlider />
+        <Footer />
       </div>
     </div>
   )

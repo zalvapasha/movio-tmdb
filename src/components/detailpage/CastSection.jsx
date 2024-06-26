@@ -17,27 +17,18 @@ const CastSection = ({ id, media_type }) => {
       })
   }, [id, media_type])
 
-  // Determine the number of columns based on screen size
-  const getMaxVisibleCast = () => {
-    const screenWidth = window.innerWidth
-    if (screenWidth >= 1024) return 12 // 4 columns
-    if (screenWidth >= 768) return 9 // 3 columns
-    return 6 // 2 columns
-  }
-
-  const maxVisibleCast = getMaxVisibleCast()
-  const visibleCast = showAll ? cast : cast.slice(0, maxVisibleCast)
+  const visibleCast = showAll ? cast : cast.slice(0, 12)
 
   return (
     <div className='relative'>
-      <div className='flex flex-wrap gap-4 justify-center'>
+      <div className='flex flex-wrap gap-4 justify-centerm justify-center mx-2'>
         {visibleCast.length > 0 ? (
           visibleCast.map((member) => (
             <div
               key={member.id}
-              className='flex items-center bg-primary-2 p-2 w-52 rounded-full'
+              className='flex items-center bg-primary-2 p-2 w-44 md:w-56 rounded-full'
             >
-              <div className='w-14 h-14 rounded-full overflow-hidden flex justify-center items-center'>
+              <div className='w-11 h-11 rounded-full overflow-hidden flex justify-center items-center'>
                 <img
                   src={`https://image.tmdb.org/t/p/w200${member.profile_path}`}
                   onError={(e) => (e.target.src = placeholderPerson)}
@@ -45,9 +36,13 @@ const CastSection = ({ id, media_type }) => {
                   className='w-full h-full object-cover'
                 />
               </div>
-              <div className='ml-4'>
-                <h2 className='text-lg line-clamp-1'>{member.name}</h2>
-                <p className='text-sm line-clamp-1'>{member.character}</p>
+              <div className='ml-2'>
+                <h2 className='text-sm md:text-lg line-clamp-1'>
+                  {member.name}
+                </h2>
+                <p className='text-xs md:text-sm line-clamp-1'>
+                  {member.character}
+                </p>
               </div>
             </div>
           ))
@@ -55,7 +50,7 @@ const CastSection = ({ id, media_type }) => {
           <p>No cast information available</p>
         )}
       </div>
-      {cast.length > maxVisibleCast && (
+      {cast.length > 12 && (
         <div
           className={`flex items-center justify-center w-full mt-4 ${showAll ? '' : 'absolute -bottom-10 bg-gradient-to-t from-primary-1 from-45% h-28 to-transparent'}`}
         >

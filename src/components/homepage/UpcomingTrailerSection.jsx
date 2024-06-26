@@ -3,7 +3,9 @@ import Slider from 'react-slick'
 import './slider.css'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+import { FaPlay } from 'react-icons/fa'
 import { getMoviesTopRated, getTVShowsTopRated } from '../../api/Api'
+import TrailerModal from '../TrailerModal'
 
 const UpcomingTrailerSection = () => {
   const initialFilters = [
@@ -26,6 +28,8 @@ const UpcomingTrailerSection = () => {
   const [datas, setDatas] = useState([])
   const [backgroundImage, setBackgroundImage] = useState('')
   const [currentSlide, setCurrentSlide] = useState(0)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [selectedTrailer, setSelectedTrailer] = useState(null)
 
   const settings = {
     className: 'center',
@@ -113,6 +117,16 @@ const UpcomingTrailerSection = () => {
 
   const imgURL = 'https://image.tmdb.org/t/p/w500'
 
+  const handleSlideClick = (data) => {
+    setSelectedTrailer(data)
+    setIsModalOpen(true)
+  }
+
+  const closeModal = () => {
+    setIsModalOpen(false)
+    setSelectedTrailer(null)
+  }
+
   return (
     <div
       style={{
@@ -143,7 +157,7 @@ const UpcomingTrailerSection = () => {
           {datas.length > 0 ? (
             <Slider {...settings}>
               {datas.map((data, id) => (
-                <div key={id}>
+                <div key={id} onClick={() => handleSlideClick(data)}>
                   <div
                     key={data.id}
                     className='flex flex-col items-center justify-center p-4'
@@ -151,6 +165,15 @@ const UpcomingTrailerSection = () => {
                     <img
                       src={imgURL + data.backdrop_path}
                       alt={data.title || data.name}
+                      className='relative rounded-lg'
+                    />
+                    <FaPlay
+                      style={{
+                        color: 'white',
+                        opacity: 0.7,
+                      }}
+                      size={30}
+                      className='absolute'
                     />
                   </div>
                 </div>
@@ -161,6 +184,14 @@ const UpcomingTrailerSection = () => {
           )}
         </div>
       </div>
+      {isModalOpen && selectedTrailer && (
+        <TrailerModal
+          isOpen={isModalOpen}
+          onClose={closeModal}
+          trailer={selectedTrailer}
+          mediaType={filters.find((filter) => filter.active).mediaType}
+        />
+      )}
     </div>
   )
 }

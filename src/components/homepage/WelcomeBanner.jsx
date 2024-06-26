@@ -28,7 +28,7 @@ const WelcomeBanner = () => {
           backgroundPosition: 'center',
         }}
       >
-        <div className='absolute inset-0 bg-gradient-to-b from-primary/70 to-primary/20'></div>
+        <div className='absolute inset-0 bg-black/50'></div>
         <div className='max-w-[1240px] mx-auto px-4 py-12 relative z-10'>
           <h1 className='text-5xl font-bold text-white'>Welcome to Movio</h1>
           <p className='py-4 text-white'>

@@ -86,7 +86,7 @@ const DetailBanner = ({ id, media_type }) => {
               </div>
               <div className='py-0 md:border-b-[1px] border-white/30'>
                 <h2 className='text-2xl md:text-3xl'>Overview</h2>
-                <p className='text-white/70'>{data.overview}</p>
+                <p className='text-white/70 md:line-clamp-6'>{data.overview}</p>
               </div>
               <div className='flex flex-col gap-4 py-2 border-b-[1px] border-white/30'>
                 <div className='flex  justify-center md:justify-start gap-4 text-sm'>

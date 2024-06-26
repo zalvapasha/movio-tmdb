@@ -1,14 +1,13 @@
-import React from "react";
-import NavBar from "../components/NavBar";
-
+import React from 'react'
+import NavBar from '../components/NavBar'
 
 const MainLayout = (props) => {
-    return(
-        <div>
-            <NavBar/>
-            {props.children}
-        </div>
-    );
+  return (
+    <div>
+      <NavBar />
+      {props.children}
+    </div>
+  )
 }
 
-export default MainLayout;
+export default MainLayout
