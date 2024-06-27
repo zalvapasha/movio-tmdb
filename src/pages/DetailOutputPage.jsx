@@ -12,6 +12,7 @@ const DetailOutputPage = () => {
         <DetailBanner id={id} media_type={media_type} />
         <TrailerSection id={id} media_type={media_type} />
         <CastSection id={id} media_type={media_type} />
+        <div className='h-[42px]'></div>
       </div>
     </div>
   )

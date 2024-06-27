@@ -25,6 +25,7 @@ const TrendingSlider = () => {
 
   const [filters, setFilters] = useState(initialFilters)
   const [movies, setMovies] = useState([])
+  const [startPos, setStartPos] = useState(null)
 
   const imgURL = 'https://image.tmdb.org/t/p/w500'
   const navigate = useNavigate()
@@ -40,6 +41,23 @@ const TrendingSlider = () => {
 
   const handleClick = (id, mediaType) => {
     navigate(`/details/${mediaType}/${id}`)
+  }
+
+  const handleMouseDown = (event) => {
+    setStartPos({ x: event.clientX, y: event.clientY })
+  }
+
+  const handleMouseUp = (event, movieId, mediaType) => {
+    if (startPos) {
+      const distance = Math.sqrt(
+        Math.pow(event.clientX - startPos.x, 2) +
+          Math.pow(event.clientY - startPos.y, 2)
+      )
+      if (distance < 10) {
+        handleClick(movieId, mediaType)
+      }
+      setStartPos(null)
+    }
   }
 
   useEffect(() => {
@@ -94,7 +112,7 @@ const TrendingSlider = () => {
   return (
     <div className='flex justify-center bg-primary-2'>
       <div className='w-11/12 my-5'>
-        <div className='flex flex-col xs:flex-row gap-2 ml-5 mb-2'>
+        <div className='flex flex-col xs:flex-row gap-2 ml-2 mb-2'>
           <h2 className='pr-4 text-white text-base'>Trending This Week</h2>
           <nav className='border-[2px] rounded-full border-primary w-fit'>
             <ul className='flex '>
@@ -116,9 +134,10 @@ const TrendingSlider = () => {
               {movies.map((movie, id) => (
                 <div
                   key={id}
-                  className=''
-                  onClick={() =>
-                    handleClick(
+                  onMouseDown={handleMouseDown}
+                  onMouseUp={(event) =>
+                    handleMouseUp(
+                      event,
                       movie.id,
                       filters.find((f) => f.active).mediaType
                     )

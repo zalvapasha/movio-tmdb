@@ -30,6 +30,9 @@ const UpcomingTrailerSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedTrailer, setSelectedTrailer] = useState(null)
+  const [startPos, setStartPos] = useState(null)
+
+  const imgURL = 'https://image.tmdb.org/t/p/w500'
 
   const settings = {
     className: 'center',
@@ -115,8 +118,6 @@ const UpcomingTrailerSection = () => {
     }
   }, [currentSlide, datas])
 
-  const imgURL = 'https://image.tmdb.org/t/p/w500'
-
   const handleSlideClick = (data) => {
     setSelectedTrailer(data)
     setIsModalOpen(true)
@@ -125,6 +126,23 @@ const UpcomingTrailerSection = () => {
   const closeModal = () => {
     setIsModalOpen(false)
     setSelectedTrailer(null)
+  }
+
+  const handleMouseDown = (event) => {
+    setStartPos({ x: event.clientX, y: event.clientY })
+  }
+
+  const handleMouseUp = (event, data) => {
+    if (startPos) {
+      const distance = Math.sqrt(
+        Math.pow(event.clientX - startPos.x, 2) +
+          Math.pow(event.clientY - startPos.y, 2)
+      )
+      if (distance < 10) {
+        handleSlideClick(data)
+      }
+      setStartPos(null)
+    }
   }
 
   return (
@@ -138,7 +156,7 @@ const UpcomingTrailerSection = () => {
     >
       <div className='flex justify-center bg-black bg-opacity-70'>
         <div className='w-11/12 my-5'>
-          <div className='flex flex-col xs:flex-row gap-2 ml-5 mb-2'>
+          <div className='flex flex-col xs:flex-row gap-2 ml-2 mb-2'>
             <h2 className='pr-4 text-white text-base'>Top Rated Trailer</h2>
             <nav className='border-[2px] rounded-full border-tertiary w-fit'>
               <ul className='flex '>
@@ -157,7 +175,11 @@ const UpcomingTrailerSection = () => {
           {datas.length > 0 ? (
             <Slider {...settings}>
               {datas.map((data, id) => (
-                <div key={id} onClick={() => handleSlideClick(data)}>
+                <div
+                  key={id}
+                  onMouseDown={handleMouseDown}
+                  onMouseUp={(event) => handleMouseUp(event, data)}
+                >
                   <div
                     key={data.id}
                     className='flex flex-col items-center justify-center p-4'

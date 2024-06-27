@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Slider from 'react-slick'
 import {
   getStreamingMovies,
@@ -15,24 +16,29 @@ const WhatsPopularSlider = () => {
       name: 'Streaming',
       active: true,
       fetchFunc: getStreamingMovies,
+      mediaType: 'movie',
     },
     {
       id: 2,
       name: 'For Rent',
       active: false,
       fetchFunc: getForRentMovies,
+      mediaType: 'movie',
     },
     {
       id: 3,
       name: 'In Theaters',
       active: false,
       fetchFunc: getInTheatersMovies,
+      mediaType: 'movie',
     },
   ]
 
   const [filters, setFilters] = useState(initialFilters)
   const [movies, setMovies] = useState([])
+  const [startPos, setStartPos] = useState(null)
 
+  const navigate = useNavigate()
   const imgURL = 'https://image.tmdb.org/t/p/w500'
 
   const handleFilterClick = (id) => {
@@ -92,10 +98,31 @@ const WhatsPopularSlider = () => {
     ],
   }
 
+  const handleClick = (id, mediaType) => {
+    navigate(`/details/${mediaType}/${id}`)
+  }
+
+  const handleMouseDown = (event) => {
+    setStartPos({ x: event.clientX, y: event.clientY })
+  }
+
+  const handleMouseUp = (event, movieId, mediaType) => {
+    if (startPos) {
+      const distance = Math.sqrt(
+        Math.pow(event.clientX - startPos.x, 2) +
+          Math.pow(event.clientY - startPos.y, 2)
+      )
+      if (distance < 10) {
+        handleClick(movieId, mediaType)
+      }
+      setStartPos(null)
+    }
+  }
+
   return (
     <div className='flex justify-center bg-primary-2'>
       <div className='w-11/12 my-5'>
-        <div className='flex flex-col xs:flex-row  gap-2 ml-5 mb-2'>
+        <div className='flex flex-col xs:flex-row gap-2 ml-2 mb-2'>
           <h2 className='pr-2 text-white text-base'>What's Popular</h2>
           <nav className='border-[2px] rounded-full border-primary w-fit'>
             <ul className='flex'>
@@ -115,7 +142,18 @@ const WhatsPopularSlider = () => {
           {movies.length > 0 ? (
             <Slider {...settings}>
               {movies.map((movie, i) => (
-                <div key={i} className='w-36'>
+                <div
+                  key={i}
+                  onMouseDown={handleMouseDown}
+                  onMouseUp={(event) =>
+                    handleMouseUp(
+                      event,
+                      movie.id,
+                      filters.find((f) => f.active).mediaType
+                    )
+                  }
+                  className='w-36'
+                >
                   <article className='w-36 p-2 rounded-xl transform transition-all duration-300 hover:scale-105 cursor-pointer'>
                     <img
                       src={imgURL + movie.poster_path}

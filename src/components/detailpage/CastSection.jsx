@@ -26,7 +26,7 @@ const CastSection = ({ id, media_type }) => {
           visibleCast.map((member) => (
             <div
               key={member.id}
-              className='flex items-center bg-primary-2 p-2 w-44 md:w-56 rounded-full'
+              className='flex items-center bg-primary-2 p-2 w-40 md:w-56 rounded-full'
             >
               <div className='w-11 h-11 rounded-full overflow-hidden flex justify-center items-center'>
                 <img
@@ -37,7 +37,7 @@ const CastSection = ({ id, media_type }) => {
                 />
               </div>
               <div className='ml-2'>
-                <h2 className='text-sm md:text-lg line-clamp-1'>
+                <h2 className='text-sm  md:text-lg line-clamp-1'>
                   {member.name}
                 </h2>
                 <p className='text-xs md:text-sm line-clamp-1'>

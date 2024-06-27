@@ -56,11 +56,11 @@ const ResultOutput = () => {
   return (
     <div className='mx-2'>
       {data.movies.length > 0 && (
-        <div className='mb-5'>
-          <div className='border-l-4 border-tertiary flex items-center h-8 pl-2 mb-2'>
+        <div className='mb-7'>
+          <div className='border-l-4 border-tertiary flex items-center h-8 pl-2 mb-2 ml-2'>
             <h2 className='text-xl text-white font-bold'>Movies</h2>
           </div>
-          <div className='grid grid-cols-1 sm:grid-cols-2  gap-4'>
+          <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
             {data.movies.map((movie) => (
               <div key={movie.id} className='flex bg-primary-2 p-2 rounded'>
                 <div className='w-12 mr-2 overflow-hidden'>
@@ -68,10 +68,10 @@ const ResultOutput = () => {
                     src={imgURL + movie.poster_path}
                     onError={(e) => (e.target.src = placeholderPoster)}
                     alt={movie.title}
-                    className='h-full object-cover rounded'
+                    className='fit object-cover rounded'
                   />
                 </div>
-                <div>
+                <div className='flex flex-col justify-center'>
                   <h3 className='text-lg text-white line-clamp-1'>
                     {movie.title}
                   </h3>
@@ -83,23 +83,23 @@ const ResultOutput = () => {
         </div>
       )}
       {data.tvShows.length > 0 && (
-        <div className='mb-4'>
-          <div className='border-l-4 border-tertiary flex items-center h-8 pl-2 mb-2'>
+        <div className='mb-7'>
+          <div className='border-l-4 border-tertiary flex items-center h-8 pl-2 mb-2 ml-2'>
             <h2 className='text-xl text-white font-bold'>TV Shows</h2>
           </div>
 
           <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
             {data.tvShows.map((tv) => (
               <div key={tv.id} className='flex bg-primary-2 p-2 rounded'>
-                <div className='w-12 mr-2 overflow-hidden'>
+                <div className='w-12 mr-4 overflow-hidden'>
                   <img
                     src={imgURL + tv.poster_path}
                     onError={(e) => (e.target.src = placeholderPoster)}
                     alt={tv.title}
-                    className='h-full object-cover rounded'
+                    className='object-cover rounded'
                   />
                 </div>
-                <div>
+                <div className='flex flex-col justify-center'>
                   <h3 className='text-lg text-white line-clamp-1'>{tv.name}</h3>
                   <p className='text-sm text-gray-400'>{tv.first_air_date}</p>
                 </div>
@@ -110,7 +110,7 @@ const ResultOutput = () => {
       )}
       {data.people.length > 0 && (
         <div>
-          <div className='border-l-4 border-tertiary flex items-center h-8 pl-2 mb-2'>
+          <div className='border-l-4 border-tertiary flex items-center h-8 pl-2 mb-2 ml-2'>
             <h2 className='text-xl text-white font-bold'>Peoples</h2>
           </div>
           <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4'>
