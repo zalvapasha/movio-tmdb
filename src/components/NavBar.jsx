@@ -1,5 +1,7 @@
 import React, { useState, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import logoUnactive from '../assets/logo-unactive.png'
+import logoActive from '../assets/logo-active.png'
 
 const NavBar = () => {
   const [isOpenMovies, setIsOpenMovies] = useState(false)
@@ -7,6 +9,7 @@ const NavBar = () => {
   const [isOpenCategory, setIsOpenCategory] = useState(false)
   const [category, setCategory] = useState('all')
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isLogoHovered, setIsLogoHovered] = useState(false)
   const searchQuery = useRef()
   const navigate = useNavigate()
 
@@ -60,16 +63,18 @@ const NavBar = () => {
   }
 
   return (
-    <nav className='header sticky top-0 bg-primary shadow-md flex items-center justify-between px-4 py-2 z-40'>
-      <div className='nav font-semibold text-md'>
+    <nav className='header sticky top-0 bg-primary shadow-md flex items-center justify-between px-6 z-40'>
+      <div className='nav font-semibold text-md mt-2'>
         <div className='flex items-center'>
-          <button
+          <img
+            src={isLogoHovered ? logoActive : logoUnactive}
+            alt='Movio'
             onClick={handleHomeClick}
-            className='p-4 border-t-2 text-quaternary border-tertiary border-opacity-0 hover:border-opacity-100 hover:text-tertiary duration-200 cursor-pointer active'
-          >
-            Home
-          </button>
-          <div className='hidden sm:flex'>
+            className='h-8 mr-2 cursor-pointer'
+            onMouseEnter={() => setIsLogoHovered(true)}
+            onMouseLeave={() => setIsLogoHovered(false)}
+          />
+          <div className='hidden sm:flex relative'>
             <button
               onClick={() => setIsOpenMovies((prev) => !prev)}
               className='p-4 border-t-2 text-quaternary border-tertiary border-opacity-0 hover:border-opacity-100 hover:text-tertiary duration-200 cursor-pointer active'
@@ -77,7 +82,7 @@ const NavBar = () => {
               Movies
             </button>
             {isOpenMovies && (
-              <div className='bg-primary absolute top-16 flex flex-col p-3 text-sm rounded-md'>
+              <div className='bg-primary absolute top-16 w-28 flex flex-col p-3 text-sm rounded-md'>
                 <ul className='text-quaternary'>
                   <li
                     onClick={handleMoviesPopularClick}
@@ -106,6 +111,8 @@ const NavBar = () => {
                 </ul>
               </div>
             )}
+          </div>
+          <div className='hidden sm:flex relative'>
             <button
               onClick={() => setIsOpenTVShows((prev) => !prev)}
               className='p-4 border-t-2 text-quaternary border-tertiary border-opacity-0 hover:border-opacity-100 hover:text-tertiary duration-200 cursor-pointer active'
@@ -113,7 +120,7 @@ const NavBar = () => {
               TV Shows
             </button>
             {isOpenTVShows && (
-              <div className='bg-primary absolute top-16 flex flex-col p-3 text-sm rounded-md'>
+              <div className='bg-primary absolute top-16 w-28 flex flex-col p-3 text-sm rounded-md'>
                 <ul className='text-quaternary'>
                   <li
                     onClick={handleTVShowsPopularClick}
