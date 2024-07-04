@@ -70,7 +70,7 @@ const NavBar = () => {
             src={isLogoHovered ? logoActive : logoUnactive}
             alt='Movio'
             onClick={handleHomeClick}
-            className='h-8 mr-2 cursor-pointer'
+            className='h-4 xs:h-8 mr-2 cursor-pointer'
             onMouseEnter={() => setIsLogoHovered(true)}
             onMouseLeave={() => setIsLogoHovered(false)}
           />
