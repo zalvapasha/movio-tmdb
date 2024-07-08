@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { searchMultiData } from '../../api/Api'
 
 const ResultOutput = () => {
@@ -62,7 +62,11 @@ const ResultOutput = () => {
           </div>
           <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
             {data.movies.map((movie) => (
-              <div key={movie.id} className='flex bg-primary-2 p-2 rounded'>
+              <Link
+                to={`/details/movie/${movie.id}`}
+                key={movie.id}
+                className='flex bg-primary-2 p-2 rounded'
+              >
                 <div className='w-12 mr-2 overflow-hidden'>
                   <img
                     src={imgURL + movie.poster_path}
@@ -77,7 +81,7 @@ const ResultOutput = () => {
                   </h3>
                   <p className='text-sm text-gray-400'>{movie.release_date}</p>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
@@ -90,7 +94,11 @@ const ResultOutput = () => {
 
           <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
             {data.tvShows.map((tv) => (
-              <div key={tv.id} className='flex bg-primary-2 p-2 rounded'>
+              <Link
+                to={`/details/tv/${tv.id}`}
+                key={tv.id}
+                className='flex bg-primary-2 p-2 rounded'
+              >
                 <div className='w-12 mr-4 overflow-hidden'>
                   <img
                     src={imgURL + tv.poster_path}
@@ -103,7 +111,7 @@ const ResultOutput = () => {
                   <h3 className='text-lg text-white line-clamp-1'>{tv.name}</h3>
                   <p className='text-sm text-gray-400'>{tv.first_air_date}</p>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
